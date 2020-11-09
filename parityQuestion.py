@@ -1,5 +1,4 @@
 # Write a program to find the node at which the intersection of two singly linked lists begins.
-from typing import List
 
 def paritybitBrute(integer_64: int) -> int:
     parity_count = 0
