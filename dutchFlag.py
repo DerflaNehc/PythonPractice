@@ -53,10 +53,36 @@ def dutchFlagPartSave(arr:List[int],pivot_idx: int) -> None:
             arr[i], arr[big_val_idx] = arr[big_val_idx], arr[i]
             big_val_idx-=1
 
+#Reduce time complexity even more.
+#we allocate each iterated element into equal,smaller, or larger
+#the uniterated elements stay in the "unclassified" part of the array
+def dutchFlagPartSave2(arr:List[int],pivot_idx: int) -> None:
+    if len(arr)<=1:
+        return arr
+    pivot = arr[pivot_idx]
+    smaller, equal, larger = 0,0,len(arr) -1
+
+    #unclassified is larger - equal. So while theres still elements in unclassified
+    while equal<=larger:
+        if arr[equal]<pivot:
+            arr[smaller],arr[equal] = arr[equal],arr[smaller]
+            smaller +=1
+            equal +=1
+        elif arr[equal] == pivot:
+            equal +=1
+        else:
+            arr[larger],arr[equal] = arr[equal],arr[larger]
+            larger -=1
+
+
+
 
 if __name__ == '__main__':
-    a = [-1,-1,-1,-1,-1]
+    a = [0,1,1,2,-1]
     b = copy.deepcopy(a)
-    print(dutchFlagPartTrivial(a,0))
-    dutchFlagPartSave(b,0)
+    c = copy.deepcopy(a)
+    print(dutchFlagPartTrivial(a,2))
+    dutchFlagPartSave(b,2)
     print(b)
+    dutchFlagPartSave2(c,2)
+    print(c)
